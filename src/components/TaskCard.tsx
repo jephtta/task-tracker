@@ -1,10 +1,11 @@
 "use client";
 
 import { Task, TaskStatus } from "@/lib/types";
+import { isOverdue } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Pencil, Trash2, Calendar, AlertCircle } from "lucide-react";
-import { format, isPast, parseISO, isToday } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 interface TaskCardProps {
   task: Task;
@@ -18,14 +19,8 @@ const STATUS_CONFIG: Record<TaskStatus, { label: string; className: string }> = 
   done: { label: "Done", className: "bg-emerald-900/40 text-emerald-300 border-emerald-700" },
 };
 
-function isOverdue(dueDate: string, status: TaskStatus): boolean {
-  if (status === "done") return false;
-  const parsed = parseISO(dueDate);
-  return isPast(parsed) && !isToday(parsed);
-}
-
 export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
-  const overdue = isOverdue(task.dueDate, task.status);
+  const overdue = isOverdue(task);
   const statusConfig = STATUS_CONFIG[task.status];
 
   return (

@@ -23,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Plus, CheckSquare, ChevronDown, LogOut, User } from "lucide-react";
+import Image from "next/image";
 import { toast } from "sonner";
 
 type FilterStatus = TaskStatus | "all";
@@ -86,11 +87,12 @@ export function TasksPage() {
               className="inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-zinc-400 hover:text-white hover:bg-[#222222] transition-all duration-150 outline-none text-sm"
             >
               {user?.photoURL ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={user.photoURL}
                   alt={user.displayName || "User"}
-                  className="h-6 w-6 rounded-full"
+                  width={24}
+                  height={24}
+                  className="rounded-full"
                 />
               ) : (
                 <User className="h-4 w-4" />

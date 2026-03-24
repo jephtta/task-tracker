@@ -1,18 +1,8 @@
 "use client";
 
 import { Task, TaskStatus } from "@/lib/types";
-import { parseISO, isPast, isToday } from "date-fns";
+import { isOverdue } from "@/lib/utils";
 import { CheckCircle2, Circle, Clock, AlertCircle } from "lucide-react";
-
-interface DashboardProps {
-  tasks: Task[];
-}
-
-function isOverdue(task: Task): boolean {
-  if (task.status === "done") return false;
-  const parsed = parseISO(task.dueDate);
-  return isPast(parsed) && !isToday(parsed);
-}
 
 const STATUS_ICONS: Record<TaskStatus, React.ReactNode> = {
   todo: <Circle className="h-5 w-5 text-zinc-400" />,
