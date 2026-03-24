@@ -1,0 +1,36 @@
+{
+  "assumptions": [
+    {
+      "category": "stack",
+      "detail": "No analysis.json found (stage 00 not run). Used Next.js App Router as specified explicitly in PRD, Cloud Run for hosting, Firebase Auth with Google sign-in."
+    },
+    {
+      "category": "feature",
+      "detail": "Tasks sorted by dueDate ascending. Tasks without a future due date appear first. This is the most natural sort for a task list."
+    },
+    {
+      "category": "feature",
+      "detail": "'Overdue' defined as: status is not 'done' AND dueDate is strictly before today (not including today). Tasks due today are not considered overdue."
+    },
+    {
+      "category": "feature",
+      "detail": "Task description is optional (not required by the form). Title and due date are required."
+    },
+    {
+      "category": "feature",
+      "detail": "Dashboard shows 4 stat cards: To Do count, In Progress count, Done count, and Overdue count. Overdue card has red accent when overdue count > 0."
+    },
+    {
+      "category": "feature",
+      "detail": "Filter and task list use Firestore real-time listener (onSnapshot) so tasks update live across tabs without refresh."
+    },
+    {
+      "category": "infra",
+      "detail": "Composite Firestore indexes created for: (userId ASC, dueDate ASC) and (userId ASC, status ASC, dueDate ASC) on the 'tasks' collection in the task-tracker-test database."
+    },
+    {
+      "category": "stack",
+      "detail": "shadcn/ui installed with base-ui backend (not Radix). DropdownMenuTrigger does not support asChild; styled directly with className instead."
+    }
+  ]
+}
